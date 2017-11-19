@@ -1,0 +1,57 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="user-info">
+    <template>
+      <style>
+        :host {
+          padding: 16px;
+          margin: 8px;
+        }
+        div.info-container{
+            display: flex;
+            background: white;
+            padding: 20px;
+            font-size: 20px;
+        }
+        div.user-data{
+            flex: 1;
+        }
+        #profile-image{
+            width: 8rem;
+        }
+      </style>
+      <div class="info-container">
+          <div class="user-image"> 
+              <img src="http://ulbcnj.org/wp-content/uploads/2015/05/placeholder.png" id="profile-image" alt="Profile image">
+          </div>
+          <div class="user-data">
+              Nombre: [[userName]] <br>
+              tarjeta: [[cardNumber]] <br>
+              Cuenta: [[accountNumber]] <br>
+          </div>
+      </div>
+    </template>
+  
+    <script>
+      class UserInfo extends Polymer.Element {
+        static get is() { return 'user-info'; }
+        static get properties() {
+        return {
+          userName: {
+            type: String,
+            value: ""
+          },
+          cardNumber: {
+            type: String,
+            value: ""
+          },
+          accountNumber: {
+            type: String,
+            value: ""
+          }
+        }
+      }
+      }
+      window.customElements.define(UserInfo.is, UserInfo);
+    </script>
+  </dom-module>

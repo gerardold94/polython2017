@@ -4,14 +4,12 @@
 <link rel="import" href="shared-styles.html">
 
 <link rel="import" href="components/balance-bar.html">
+<link rel="import" href="components/user-info.html">
 
 <dom-module id="my-home">
   <template>
     <style include="shared-styles">
-      :host {
-        padding: 16px;
-        margin: 8px;
-      }
+
 
       div {
         display: flex;
@@ -23,6 +21,7 @@
         width: 60%;
       }
     </style>
+    <user-info user-name="Juanito Perez" card-number="****-****-****-1234" account-number="124323423"></user-info>
     <div>
       <balance-bar current-progress="600" next-deposit="800" goal="1000"></balance-bar>
     </div>
