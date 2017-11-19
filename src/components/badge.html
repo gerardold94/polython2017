@@ -1,0 +1,89 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="my-badge">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        width: 96px;
+      }
+      .container {
+        position: relative;
+      }
+      img {
+        border-radius: 50%;
+        box-shadow: 0px 0px 4px 0px #444;
+        background: var(--badge-background-color, white);
+        opacity: 1;
+        display: block;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+        width: 100%;
+      }
+
+      .container:hover img {
+        opacity: 0.3;
+      }
+
+      .container:hover .middle {
+        opacity: 1;
+      }
+
+      .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%)
+      }
+
+      .text {
+        color: #333;
+        font-weight: 500;
+        padding: 10px;
+        text-align: center;
+        border-radius: 50%;
+        text-shadow: #ddd 2px 2px;
+      }
+
+      .disabled img {
+        background: #777;
+        filter: grayscale(100%);
+      }
+    </style>
+    <div class$="container [[_isDisabled(disabled)]]">
+      <img src="
+      https://firebasestorage.googleapis.com/v0/b/polython-2017.appspot.com/o/[[image]]?alt=media" alt="badge">
+      <div class="middle">
+        <div class="text">[[text]]</div>
+      </div>
+    </div>
+  </template>
+  <script>
+    class Badge extends Polymer.Element {
+      static get is () { return 'my-badge'; }
+      
+      static get properties() {
+        return {
+          image: {
+            type: String,
+            value: ''
+          },
+          text: {
+            type: String,
+            value: ''
+          },
+          disabled: Boolean
+        };
+      }
+
+      _isDisabled (prop) {
+        return prop ? 'disabled' : '';
+      }
+    }
+    window.customElements.define(Badge.is, Badge);
+  </script>
+</dom-module>

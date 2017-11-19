@@ -1,16 +1,28 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-document.html">
+
 <link rel="import" href="shared-styles.html">
 
 <link rel="import" href="components/balance-bar.html">
+<<<<<<< HEAD
 <link rel="import" href="components/user-info.html">
+=======
+<link rel="import" href="components/badge.html">
+>>>>>>> develop
 
 <dom-module id="my-home">
   <template>
     <style include="shared-styles">
+<<<<<<< HEAD
 
 
+=======
+      :host {
+        margin: 8px;
+      }
+>>>>>>> develop
       div {
         display: flex;
         align-items: center;
@@ -18,13 +30,60 @@
       }
       
       balance-bar {
-        width: 60%;
+        flex: 0.7;
       }
+
+      my-badge {
+        margin: 1rem;
+      }
+
+      .badges {
+        display: block;
+        margin: 0 auto;
+        padding: 1rem;
+        width: 80%;
+      }
+
+      .green {
+        --badge-background-color: #35ad88;
+      }
+
+      .blue {
+        --badge-background-color: #45a2dd;
+      }
+
+      @media (max-width: 600px) {
+        balance-bar {
+          flex: 0.8;
+        }
+      }
+    
     </style>
+<<<<<<< HEAD
     <user-info user="[[user]]"></user-info>
+=======
+
+    <firebase-document
+      id="query"
+      path="/users/[[user.uid]]"
+      data="{{data}}">
+    </firebase-document>
+
+>>>>>>> develop
     <div>
-      <balance-bar current-progress="600" next-deposit="800" goal="1000"></balance-bar>
+      <balance-bar current-progress="[[data.amount]]" next-deposit="[[_nextDeposit(data.amount)]]" goal="[[data.goal]]"></balance-bar>
     </div>
+    <div class="badges">
+      <h3>Medallas</h3>
+      <hr>
+      <template is="dom-repeat" items="[[badges]]">
+        <my-badge
+          image="[[item.image]]"
+          text="[[item.text]]">
+        </my-badge>
+      </template>
+    </div>
+    {{badges}}
   </template>
 
   <script>
@@ -40,12 +99,71 @@
       }
 
       static get is() { return 'my-home'; }
+<<<<<<< HEAD
       static get propierties(){
         return {
           user: {
             type: Object,
             value: {}
           }
+=======
+
+      static get properties() {
+        return {
+          images: {
+            type: Array,
+            value: [
+              {
+                image: 'https://image.flaticon.com/icons/png/128/150/150271.png',
+                color: 'green',
+                disabled: false
+              },
+              {
+                image: 'https://image.flaticon.com/icons/png/128/587/587879.png',
+                color: 'blue',
+                disabled: true
+              },
+              {
+                image: 'https://image.flaticon.com/icons/png/128/150/150271.png',
+                color: 'green',
+                disabled: true
+              },
+              {
+                image: 'https://image.flaticon.com/icons/png/128/587/587879.png',
+                color: 'blue',
+                disabled: false
+              }
+            ]
+          },
+          badges: {
+            type: Object,
+            value: Array
+          },
+          user: {
+            type: Object,
+            value: false
+          },
+          data: {
+            type: Object,
+            observer: 'dataChanged'
+          },
+          uid: String
+        };
+      }
+
+      _nextDeposit(amount) {
+        return amount + 500;
+      }
+
+      dataChanged (newData, oldData) {
+        this.badges = [];    
+        this.userData = null;    
+        if (!newData.amount || !newData.goal) return;
+        if (newData.badges) {
+          newData.badges.forEach(element => {
+            this.badges.push(element);
+          });
+>>>>>>> develop
         }
       }
     }
