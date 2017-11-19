@@ -18,7 +18,7 @@
       }
       .bar {
         background: white;
-        border-radius: 2px;
+        border-radius: 4px;
         padding: 0.5rem;
         width: 100%;
       }
@@ -31,7 +31,7 @@
       }
       .description span {
         flex: 1;
-        font-family: sans-serif;
+        font-size: 14px;
         font-weight: 300;
         justify-content: space-between;
         padding-top: 0.5rem;
@@ -47,13 +47,22 @@
         color: var(--balance-bar-complete-color,rgb(18, 221, 45));;
         text-align: right;
       }
+
+      @media (max-width: 600px) {
+        .description {
+          flex-direction: column;
+        }
+        .description span {
+          text-align: center !important;
+        }
+      }
     </style>
     <div class="bar">
       <paper-progress min="0" max="[[goal]]" value="[[currentProgress]]" secondary-progress="[[nextDeposit]]"></paper-progress>
       <div class="description">
-        <span id="progress">Progreso: [[currentProgress]]</span>
-        <span id="next-deposit">*Próximo deposito: [[nextDeposit]]</span>
-        <span id="goal">Meta: [[goal]]</span>
+        <span id="progress">Progreso: $[[currentProgress]].00 MXN</span>
+        <span id="next-deposit">Próximo deposito: $[[nextDeposit]].00 MXN</span>
+        <span id="goal">Meta: $[[goal]].00 MXN</span>
       </div>
     </div>
   </template>

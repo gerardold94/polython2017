@@ -1,0 +1,65 @@
+<!-- Firebase libraries -->
+<link rel="import" href="../../bower_components/polymerfire/firebase-app-script.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-auth-script.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
+
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../my-icons.html">
+
+<dom-module id="auth-button">
+  <template>
+    <firebase-app 
+      auth-domain="[[config.authDomain]]"
+      database-url="[[config.databaseURL]]"
+      api-key="[[config.apiKey]]">
+    </firebase-app>
+
+    <firebase-auth id="auth" user="{{user}}" provider="google"></firebase-auth>
+
+    <template is="dom-if" if="[[!user]]">
+      <paper-icon-button icon="my-icons:lock" on-click="login"></paper-icon-button>
+    </template>
+    <template is="dom-if" if="[[user]]">
+      <span>[[user.displayName]]</span>
+      <paper-icon-button icon="my-icons:logout" on-click="logout"></paper-icon-button>
+    </template>
+  </template>
+  <script>
+    let config = {
+      apiKey: "AIzaSyDW2WNlLp15v7CpBT5tiWKk8AhcvQIpXSM",
+      authDomain: "polython-2017.firebaseapp.com",
+      databaseURL: "https://polython-2017.firebaseio.com"
+    }
+    class AuthButton extends Polymer.Element {
+      static get is () { return 'auth-button'; }
+      static get properties() {
+        return {
+          config: {
+            type: Object,
+            readOnly: true,
+            value: function () { return config; }
+          },
+          user: {
+            type: Object,
+            notify: true,
+            value: false
+          }
+        };
+      }
+
+      login () {
+        this.shadowRoot.querySelector('#auth').signInWithPopup().then((result) => {
+          localStorage.setItem('user', result);
+        });
+      }
+      
+      logout () {
+        this.shadowRoot.querySelector('#auth').signOut().then(() => {
+          localStorage.removeItem('user');
+        })
+      }
+    }
+    window.customElements.define(AuthButton.is, AuthButton);
+  </script>
+</dom-module>

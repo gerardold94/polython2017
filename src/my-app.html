@@ -10,6 +10,8 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="components/auth.html">
 <link rel="import" href="my-icons.html">
 
 <link rel="lazy-import" href="my-home.html">
@@ -86,7 +88,8 @@
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
+            <div main-title>Pokids</div>
+            <auth-button user={{user}}></auth-button>
           </app-toolbar>
         </app-header>
 
@@ -95,7 +98,7 @@
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-home name="home"></my-home>
+          <my-home name="home" user="{{user}}"></my-home>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>
@@ -112,6 +115,10 @@
             type: String,
             reflectToAttribute: true,
             observer: '_pageChanged',
+          },
+          user: {
+            type: Object,
+            value: false
           },
           routeData: Object,
           subroute: String,
