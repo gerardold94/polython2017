@@ -51,12 +51,12 @@
       }
     
     </style>
-    <user-info user="[[user]]"></user-info>
+    <user-info user="[[user]]" data ="[[userData]]"></user-info>
 
     <firebase-document
       id="query"
       path="/users/[[user.uid]]"
-      data="{{data}}">
+      data="{{userData}}">
     </firebase-document>
 
     <div>
@@ -72,50 +72,18 @@
         </my-badge>
       </template>
     </div>
-    {{badges}}
   </template>
 
   <script>
     class MyHomeView extends Polymer.Element {
       ready () {
         super.ready();
-        this.user = {
-          userName: 'Juan Pérez',
-          cardNumber: '****-****-****-1234',
-          accountNumber: '1234562',
-          profileImage: 'http://ulbcnj.org/wp-content/uploads/2015/05/placeholder.png'
-        }
       }
 
       static get is() { return 'my-home'; }
 
       static get properties() {
         return {
-          images: {
-            type: Array,
-            value: [
-              {
-                image: 'https://image.flaticon.com/icons/png/128/150/150271.png',
-                color: 'green',
-                disabled: false
-              },
-              {
-                image: 'https://image.flaticon.com/icons/png/128/587/587879.png',
-                color: 'blue',
-                disabled: true
-              },
-              {
-                image: 'https://image.flaticon.com/icons/png/128/150/150271.png',
-                color: 'green',
-                disabled: true
-              },
-              {
-                image: 'https://image.flaticon.com/icons/png/128/587/587879.png',
-                color: 'blue',
-                disabled: false
-              }
-            ]
-          },
           badges: {
             type: Object,
             value: Array

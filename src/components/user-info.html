@@ -18,16 +18,17 @@
         }
         #profile-image{
             width: 8rem;
+            border-radius: 50%;
         }
       </style>
       <div class="info-container">
           <div class="user-image"> 
-              <img src="[[user.profileImage]]" id="profile-image" alt="Profile image">
+              <img src="[[user.photoURL]]" id="profile-image" alt="Profile image">
           </div>
           <div class="user-data">
-              Nombre: [[user.userName]] <br>
-              tarjeta: [[user.cardNumber]] <br>
-              Cuenta: [[user.accountNumber]] <br>
+              Nombre: [[user.displayName]] <br>
+              tarjeta: [[data.card]] <br>
+              Email: [[user.email]] <br>
           </div>
       </div>
     </template>
@@ -41,6 +42,9 @@
           user:{
               type: Object,
               value: {}
+          },
+          data: {
+              type: Object
           }
         }
       }
