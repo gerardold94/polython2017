@@ -15,6 +15,7 @@
 <link rel="import" href="my-icons.html">
 
 <link rel="lazy-import" href="my-home.html">
+<link rel="lazy-import" href="my-history.html">
 <link rel="lazy-import" href="my-view404.html">
 
 <dom-module id="my-app">
@@ -76,9 +77,14 @@
     <app-drawer-layout fullbleed narrow="{{narrow}}">
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-        <app-toolbar>Menu</app-toolbar>
+        <app-toolbar>
+          <img src="http://opcionis.com/blog/wp-content/uploads/2016/09/bbva-logo-e1456838226318-750x300.png" alt="" width="150px">
+        </app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="home" href="[[rootPath]]home">Home</a>
+          <template is="dom-if" if="[[user]]">
+            <a name="history" href="[[rootPath]]history">Historial</a>          
+          </template>
         </iron-selector>
       </app-drawer>
 
@@ -99,6 +105,7 @@
             fallback-selection="view404"
             role="main">
           <my-home name="home" user="{{user}}"></my-home>
+          <my-history name="history" user="{{user}}"></my-history>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>

@@ -1,0 +1,73 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-document.html">
+<link rel="import" href="../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="my-icons.html">
+
+<dom-module id="my-history">
+  <template>
+    <custom-style>
+      <style is="custom-style">
+        .container {
+          padding: 2rem;
+        }
+
+        .large {
+          vertical-align: middle;
+          height: 64px;
+          width: 64px;
+        }
+
+        .info-payment {
+          margin-left: 1rem;
+        }
+      </style>
+    </custom-style>
+    
+    <firebase-document
+      id="query"
+      path="/users/[[user.uid]]/payments"
+      data="{{payments}}">
+    </firebase-document>
+    <div class="container">
+      <h3>Historial de depósitos</h3>
+      <div role="listbox"></div>
+        <template is="dom-repeat" items="[[payments]]" as="payment">
+          <template is="dom-if" if="[[payment]]">
+            <paper-icon-item>
+              <div slot="item-icon">
+                <paper-icon-button icon="my-icons:money" class="large"></paper-icon-button>
+              </div>
+              <paper-item-body two-line class="info-payment">
+                <div>${{payment.amount}}.00 MXN</div>
+                <div secondary>{{payment.date}}</div>
+              </paper-item-body>
+            </paper-icon-item>
+          </template>
+        </template>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class MyHistory extends Polymer.Element {
+      static get is () { return 'my-history'; }
+      static get properties() {
+        return {
+          payments: {
+            type: Object,
+            observer: 'paymentsUpdated'
+          },
+          user: Object
+        };
+      }
+
+      paymentsUpdated (newData, oldData) {
+
+      }
+    }
+    window.customElements.define(MyHistory.is, MyHistory);
+  </script>
+</dom-module>

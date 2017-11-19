@@ -3,6 +3,7 @@
   "shell": "src/my-app.html",
   "fragments": [
     "src/my-home.html",
+    "src/my-history.html",
     "src/my-view404.html"
   ],
   "sources": [

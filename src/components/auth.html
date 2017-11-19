@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/polymerfire/firebase-auth-script.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-auth.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
 
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../my-icons.html">
@@ -44,19 +45,33 @@
             type: Object,
             notify: true,
             value: false
+          },
+          newUser: {
+            type: Object,
+            notify: true,
+            value: false
           }
         };
       }
 
       login () {
         this.shadowRoot.querySelector('#auth').signInWithPopup().then((result) => {
-          localStorage.setItem('user', result);
+          // localStorage.setItem('user', result);
+          this.newUser = {
+            'badges': {
+              'registro': {
+                'text': 'Registro completo'
+              }
+            },
+            'card': '**** **** **** 1234',
+            'goal': 1000
+          }
         });
       }
       
       logout () {
         this.shadowRoot.querySelector('#auth').signOut().then(() => {
-          localStorage.removeItem('user');
+          // localStorage.removeItem('user');
         })
       }
     }

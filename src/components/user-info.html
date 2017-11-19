@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../my-icons.html">
 
 <dom-module id="user-info">
     <template>
@@ -11,24 +13,28 @@
             display: flex;
             background: white;
             padding: 20px;
-            font-size: 20px;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            width: 90%;
         }
         div.user-data{
             flex: 1;
         }
         #profile-image{
+            margin: 1rem;
             width: 8rem;
             border-radius: 50%;
         }
       </style>
       <div class="info-container">
           <div class="user-image"> 
-              <img src="[[user.photoURL]]" id="profile-image" alt="Profile image">
+            <img src="[[user.photoURL]]" id="profile-image" alt="Profile image">
           </div>
           <div class="user-data">
-              Nombre: [[user.displayName]] <br>
-              tarjeta: [[data.card]] <br>
-              Email: [[user.email]] <br>
+            [[user.displayName]] <br>
+            <paper-icon-button icon="my-icons:card"></paper-icon-button> [[data.card]] <br>
+            [[user.email]] <br>
           </div>
       </div>
     </template>
@@ -40,8 +46,8 @@
         static get properties() {
         return {
           user:{
-              type: Object,
-              value: {}
+            type: Object,
+            value: {}
           },
           data: {
               type: Object

@@ -20,7 +20,8 @@
     "paper-progress": "polymerelements/paper-progress#^2.0.1",
     "s-circle-progress": "^1.0.0",
     "polymerfire": "firebase/polymerfire#^2.2.1",
-    "timeu-wizard": "^2.0.0"
+    "timeu-wizard": "^2.0.0",
+    "paper-item": "polymerelements/paper-item#^2.0.0"
   },
   "resolutions": {
     "polymer": "^2.0.0"
