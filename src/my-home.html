@@ -60,7 +60,7 @@
     </firebase-document>
 
     <div>
-      <balance-bar current-progress="[[data.amount]]" next-deposit="[[_nextDeposit(data.amount)]]" goal="[[data.goal]]"></balance-bar>
+      <balance-bar current-progress="[[userData.amount]]" next-deposit="[[_nextDeposit(userData.amount)]]" goal="[[userData.goal]]"></balance-bar>
     </div>
     <div class="badges">
       <h3>Medallas</h3>
@@ -92,7 +92,7 @@
             type: Object,
             value: false
           },
-          data: {
+          userData: {
             type: Object,
             observer: 'dataChanged'
           },
@@ -105,9 +105,8 @@
       }
 
       dataChanged (newData, oldData) {
-        this.badges = [];    
-        this.userData = null;    
-        if (!newData.amount || !newData.goal) return;
+        this.badges = [];
+        if (!newData || !newData.amount || !newData.goal) return;
         if (newData.badges) {
           newData.badges.forEach(element => {
             this.badges.push(element);
