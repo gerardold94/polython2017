@@ -21,7 +21,7 @@
         width: 60%;
       }
     </style>
-    <user-info user-name="Juanito Perez" card-number="****-****-****-1234" account-number="124323423"></user-info>
+    <user-info user="[[user]]"></user-info>
     <div>
       <balance-bar current-progress="600" next-deposit="800" goal="1000"></balance-bar>
     </div>
@@ -29,7 +29,25 @@
 
   <script>
     class MyHomeView extends Polymer.Element {
+      ready () {
+        super.ready();
+        this.user = {
+          userName: 'Juan Pérez',
+          cardNumber: '****-****-****-1234',
+          accountNumber: '1234562',
+          profileImage: 'http://ulbcnj.org/wp-content/uploads/2015/05/placeholder.png'
+        }
+      }
+
       static get is() { return 'my-home'; }
+      static get propierties(){
+        return {
+          user: {
+            type: Object,
+            value: {}
+          }
+        }
+      }
     }
     window.customElements.define(MyHomeView.is, MyHomeView);
   </script>

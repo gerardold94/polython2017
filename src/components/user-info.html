@@ -1,4 +1,4 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <dom-module id="user-info">
     <template>
@@ -22,32 +22,25 @@
       </style>
       <div class="info-container">
           <div class="user-image"> 
-              <img src="http://ulbcnj.org/wp-content/uploads/2015/05/placeholder.png" id="profile-image" alt="Profile image">
+              <img src="[[user.profileImage]]" id="profile-image" alt="Profile image">
           </div>
           <div class="user-data">
-              Nombre: [[userName]] <br>
-              tarjeta: [[cardNumber]] <br>
-              Cuenta: [[accountNumber]] <br>
+              Nombre: [[user.userName]] <br>
+              tarjeta: [[user.cardNumber]] <br>
+              Cuenta: [[user.accountNumber]] <br>
           </div>
       </div>
     </template>
   
     <script>
       class UserInfo extends Polymer.Element {
+        
         static get is() { return 'user-info'; }
         static get properties() {
         return {
-          userName: {
-            type: String,
-            value: ""
-          },
-          cardNumber: {
-            type: String,
-            value: ""
-          },
-          accountNumber: {
-            type: String,
-            value: ""
+          user:{
+              type: Object,
+              value: {}
           }
         }
       }
