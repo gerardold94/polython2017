@@ -6,23 +6,15 @@
 <link rel="import" href="shared-styles.html">
 
 <link rel="import" href="components/balance-bar.html">
-<<<<<<< HEAD
 <link rel="import" href="components/user-info.html">
-=======
 <link rel="import" href="components/badge.html">
->>>>>>> develop
 
 <dom-module id="my-home">
   <template>
     <style include="shared-styles">
-<<<<<<< HEAD
-
-
-=======
       :host {
         margin: 8px;
       }
->>>>>>> develop
       div {
         display: flex;
         align-items: center;
@@ -59,9 +51,7 @@
       }
     
     </style>
-<<<<<<< HEAD
     <user-info user="[[user]]"></user-info>
-=======
 
     <firebase-document
       id="query"
@@ -69,7 +59,6 @@
       data="{{data}}">
     </firebase-document>
 
->>>>>>> develop
     <div>
       <balance-bar current-progress="[[data.amount]]" next-deposit="[[_nextDeposit(data.amount)]]" goal="[[data.goal]]"></balance-bar>
     </div>
@@ -99,14 +88,6 @@
       }
 
       static get is() { return 'my-home'; }
-<<<<<<< HEAD
-      static get propierties(){
-        return {
-          user: {
-            type: Object,
-            value: {}
-          }
-=======
 
       static get properties() {
         return {
@@ -163,7 +144,6 @@
           newData.badges.forEach(element => {
             this.badges.push(element);
           });
->>>>>>> develop
         }
       }
     }
