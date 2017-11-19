@@ -1,0 +1,82 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
+
+<dom-module id="balance-bar">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-progress {
+        --paper-progress-height: 30px;
+        --paper-progress-active-color: var(--balance-bar-active-color, #01579B);
+        --paper-progress-secondary-color: var(--balance-bar-secondary-color,#E1F5FE);
+        --paper-progress-container-color: var(--balance-bar-container-color, #fff);
+        border-radius: 4px;
+        border: 1px solid #01579B;
+        width: 100%;
+      }
+      .bar {
+        background: white;
+        border-radius: 2px;
+        padding: 0.5rem;
+        width: 100%;
+      }
+      .complete {
+        --paper-progress-active-color: var(--balance-bar-complete-color, rgb(18, 221, 45));
+      }
+      .description {
+        display: flex;
+        width: 100%;
+      }
+      .description span {
+        flex: 1;
+        font-family: sans-serif;
+        font-weight: 300;
+        justify-content: space-between;
+        padding-top: 0.5rem;
+      }
+      .description #progress {
+        color: var(--balance-bar-active-color, #01579B);
+      }
+      .description #next-deposit {
+        color: var(--balance-bar-secondary-color,rgb(137, 200, 241));
+        text-align: center;
+      }
+      .description #goal {
+        color: var(--balance-bar-complete-color,rgb(18, 221, 45));;
+        text-align: right;
+      }
+    </style>
+    <div class="bar">
+      <paper-progress min="0" max="[[goal]]" value="[[currentProgress]]" secondary-progress="[[nextDeposit]]"></paper-progress>
+      <div class="description">
+        <span id="progress">Progreso: [[currentProgress]]</span>
+        <span id="next-deposit">*Próximo deposito: [[nextDeposit]]</span>
+        <span id="goal">Meta: [[goal]]</span>
+      </div>
+    </div>
+  </template>
+  <script>
+    class BalanceBar extends Polymer.Element {
+      static get is () { return 'balance-bar'; }
+      static get properties() {
+        return {
+          currentProgress: {
+            type: Number,
+            value: 0
+          },
+          nextDeposit: {
+            type: Number,
+            value: 0
+          },
+          goal: {
+            type: Number,
+            value: 0
+          }
+        }
+      }
+    }
+    window.customElements.define(BalanceBar.is, BalanceBar);
+  </script>
+</dom-module>
